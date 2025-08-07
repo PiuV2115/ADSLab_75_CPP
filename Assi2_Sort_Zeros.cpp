@@ -1,63 +1,90 @@
-#include <iostream>
+
+/*
+Problem Statement
+Write a C++ program to sort an array of integers in descending order using the Merge Sort algorithm.
+The program should:
+Accept the size of the array from the user.
+Read the array elements.
+Sort the array in descending order.
+Display the sorted array.
+*/
+
+
+#include<iostream>
+#include<vector>
 using namespace std;
-
-int indx = 0, count = 0, answer[20];
-
-void merge(int nums[], int low, int high)
+void Merge(vector<int> &arr,int st,int end,int mid)
 {
-
-    for (int i = low; i < high + 1; i++)
+    vector<int> temp;
+    int i=st , j=mid+1;
+    while(i<=mid&&j<=end)
     {
-        if (nums[i] == 0)
+        if(arr[i]>=arr[j])
         {
-            int j = i;
-            while (j < high)
-            {
-                int temp = nums[j];
-                nums[j] = nums[j + 1];
-                nums[j + 1] = temp;
-                j++;
-            }
+            temp.push_back(arr[i]);
+            i++;
+        }
+        else
+        {
+            temp.push_back(arr[j]);
+            j++;
         }
     }
+
+    while(i<=mid)
+    {
+        temp.push_back(arr[i]);
+        i++;
+    }
+
+    while(j<=end)
+    {
+        temp.push_back(arr[j]);
+        j++;
+    }
+
+    for(int idx=0;idx<temp.size();idx++)
+    {
+        arr[st+idx]=temp[idx];
+    }
 }
-
-void divide(int nums[], int low, int high)
+void mergeSort(vector<int> &arr,int st,int end)
 {
-    if (low >= high)
-        return;
+    if(st<end)
+    {
+        int mid=st+(end-st)/2;
+        mergeSort(arr,st,mid);
+        mergeSort(arr,mid+1,end);
 
-    int mid = (high + low) / 2;
-
-    divide(nums, low, mid);
-    divide(nums, mid + 1, high);
-    merge(nums, low, high);
+        Merge(arr,st,end,mid);
+    }
 }
 
 int main()
 {
-    int nums[20], choice = 1, ans;
-    int i = 0, size;
-    bool flag = false;
-    cout << "Enter Array Size : ";
-    cin >> size;
-
-    while (i <= size)
+   
+    int size;
+    cout<<"Enter Size of an array : ";
+    cin>>size;
+     vector<int> A(size);
+    cout<<"Enter a Array : ";
+    for(int i=0;i<size;i++)
     {
-        cout << "Enter array[ " << i << " ] (Enter 2 to exit):: ";
-        cin >> choice;
-        cout << endl;
-        nums[i] = choice;
-        i++;
+        cin>>A[i];
     }
-
-    divide(nums, 0, size - 1);
-    cout << "Rearranged Array :: [ ";
-    for (int j = 0; j < size; j++)
+    mergeSort(A,0,size-1);
+    cout<<"Sorted Arrray is : ";
+    for(int i=0;i<size;i++)
     {
-        cout << nums[j] << "  ,";
+        cout<<A[i]<<"\t";
     }
-    cout << " ]" << endl;
-
-    return 0;
+    return 0;
 }
+/*
+Input:
+Enter Size of an array : 5
+Enter a Array : 0 0 20 50 30
+
+output:
+50    40    30    0    0
+*/
