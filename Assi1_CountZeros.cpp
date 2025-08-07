@@ -1,3 +1,16 @@
+//Problem Statement
+//Write a program in C++ that determines the number of trailing zeros in a binary array that contains only 0s and 1s, 
+//arranged in non-increasing order (all 1s first, followed by all 0s).
+
+//constraints
+//The array size should be between 1 and 10.
+//The array should contain only 0s and 1s.
+//The array must follow the rule:
+//All 1s come first (if any).
+//All 0s come after the 1s.
+
+
+
 #include<iostream>
 using namespace std;
 int main()
@@ -79,3 +92,11 @@ int main()
 
     return 0;
 }//end of main
+
+
+//Input
+//Enter array size : 8
+//Enter array : 1 1 1 1 0 0 0 0
+
+//output
+//4
