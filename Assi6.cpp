@@ -6,44 +6,42 @@ int find(int s[10],int e[10],int n,int k)
 {
 	vector<int> visit;
 	int person=0;
-	int min=9999,result;
+	int min=9999,result=0;
 	for(i=0;i<n;i++)
 	{
 		visit.push_back(0);
 	}
 	while(person<k)
 	{
-		int count=0,idx=0,endtime=0;
-		for(int i=0;i<n;i++)
-		{
-			if(endtime<s[i]&&visit[i]!=1)
-			{
-				if(min>s[i])
-				{
+	    for(int j=0;j<n;j++)
+	    {
+	        if(visit[j]!=1)
+	        {
+	        int min=9999,idx=0,endtime=0;
+	       	for(int i=0;i<n;i++)
+	    	{
+		    	if(endtime<=s[i]&&min>s[i])
+			    {
 					idx=i;
-					if(i==n-1)
-					{
-						visit[idx]=1
-						result++;
-						endtime=e[idx];
-					}
+					min=s[i];
 				}
 				else
 				{
-					min=s[j];
+			        continue;
 				}
 			}
-		}
-		
-		
-	
-	
+			 visit[idx].push_back(1);
+		     result++;
+	         endtime=e[idx];
+	    	}
+	    }		   
+	    person++;
 	}
-
+	return result;
 }
 
 
-int main
+int main()
 {
 	int s[10],e[10],n,k,result;
 	cout<<"Enter no. of Shops : ";
@@ -62,6 +60,6 @@ int main
 	
 	result=find(s,e,n,k);
 	
-	return 0;
+	return result;
 	
 }
