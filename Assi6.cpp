@@ -4,23 +4,26 @@ using namespace std;
 
 int find(int s[10],int e[10],int n,int k)
 {
-	vector<int> visit;
-	int person=0;
-	int min=9999,result=0;
-	for(i=0;i<n;i++)
+	int visit[10];
+	int person=0,count=0;
+	int result=0;
+	for(int i=0;i<n;i++)
 	{
-		visit.push_back(0);
+		visit[i]=0;
 	}
 	while(person<k)
 	{
-	    for(int j=0;j<n;j++)
+	    int endtime=0;
+	    do
 	    {
-	        if(visit[j]!=1)
-	        {
-	        int min=9999,idx=0,endtime=0;
+	        count=0;
+	        int min=9999,idx=0;
 	       	for(int i=0;i<n;i++)
 	    	{
-		    	if(endtime<=s[i]&&min>s[i])
+	    	    if(endtime<=s[i]&&visit[i]!=1)
+	    	    {
+	    	        count++;
+		    	if(min>s[i])
 			    {
 					idx=i;
 					min=s[i];
@@ -29,16 +32,25 @@ int find(int s[10],int e[10],int n,int k)
 				{
 			        continue;
 				}
+	    	    }
 			}
-			 visit[idx].push_back(1);
+			if(count>0)
+			{
+			 visit[idx]=1;
 		     result++;
 	         endtime=e[idx];
-	    	}
+			}
+			else
+			{
+			    break;
+			}
+	    	}while(1);
+	    	 person++;
 	    }		   
-	    person++;
+	   	return result;
 	}
-	return result;
-}
+
+
 
 
 int main()
@@ -51,11 +63,11 @@ int main()
 	cin>>k;
 	
 	cout<<"Enter Starting Times of shops : ";
-	for(int i=0;i<N;i++)
+	for(int i=0;i<n;i++)
 		cin>>s[i];
 		
 	cout<<"Enter Ending Times of shops : ";
-	for(int i=0;i<N;i++)
+	for(int i=0;i<n;i++)
 		cin>>e[i];
 	
 	result=find(s,e,n,k);
