@@ -1,3 +1,18 @@
+/*
+PROBLEM STATEMENT
+
+You are given n shops, each with a start time (when it opens) and an end time (when it closes).
+There are k people available to visit these shops.
+
+# A person can only visit a shop if the shop's start time is greater than or equal to the person's current time.
+#Once a person visits a shop, their "current time" becomes the end time of that shop.
+#Each shop can be visited only once by at most one person.
+#The goal is to maximize the total number of shops visited by all k people.
+
+You need to output the maximum number of shops visited.
+*/
+
+
 #include<iostream>
 #include<vector>
 using namespace std;
@@ -90,6 +105,29 @@ int main()
 		cin>>e[i];
 		cout<<endl;
 	}
+
+/*
+SAMPLE INPUT AND OUTPUT
+
+Enter no. of Shops : 5
+Enter no. of Peoples : 2
+Enter Starting Times of shops :
+1] 1
+2] 3
+3] 0
+4] 5
+5] 8
+
+Enter Ending Times of shops :
+1] 2
+2] 4
+3] 6
+4] 7
+5] 9
+
+Maximum no. of shops Visited by Peoples : 4
+
+*/
 		
 	findMax(s,e,n,k);
 	
