@@ -6,12 +6,12 @@ int MaxProfit(int arr[10],int size)
    int i=0,Profit=0;
     while(i<size)
     {
-        int BuySum=0,count=0,max=-1,idx=0;
+        int BuySum=0,count=0,max=-1,maxidx=0;
         for(int j=i;j<size;j++)
         {
             if(max<=arr[j])
             {
-                idx=j;
+                maxidx=j;
                 max=arr[j];
             }
             else
@@ -20,15 +20,16 @@ int MaxProfit(int arr[10],int size)
             }
         } //give us max 
         
-        if(idx!=i)
+        if(maxidx!=i)
         {
-            for(int k=i;k<max;k++)
+            for(int k=i;k<maxidx;k++)
             {
                 count++;
                 BuySum+=arr[k];
             }
-            Profit+=((arr[max]*count)-BuySum);
-            i=idx+1;
+            int result=(arr[maxidx]*count)-BuySum;
+            Profit+=result;
+            i=maxidx+1;
         }
         else
         {
@@ -43,7 +44,7 @@ int MaxProfit(int arr[10],int size)
     {
         cout<<"Maximum Profit Generated is : "<<Profit;
     }
-    
+
     return 0;
 }
 
@@ -52,7 +53,7 @@ int main()
     int n,arr[10];
     cout<<"Enter no. of Stocks : ";
     cin>>n;
-    cout<<"Enter Stocks Prices : ";
+    cout<<"Enter Stocks Prices : \n";
     for(int i=0;i<n;i++)
     {
         cout<<i+1<<"] : ";
